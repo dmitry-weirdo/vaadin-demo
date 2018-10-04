@@ -17,19 +17,6 @@ public class TodoLayout extends VerticalLayout implements TodoChangeListener {
 
     @PostConstruct
     public void init() {
-/*
-        // todo: remove this bydlocode, solve a normal @Autowire + @PostConstruct
-        while (repository == null) {
-            try {
-                System.out.println("Repository is still null. Trying again...");
-                Thread.sleep(1000);
-            }
-            catch (final InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-*/
-
         update();
     }
     private void update() {

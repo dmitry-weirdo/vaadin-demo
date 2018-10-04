@@ -1,7 +1,5 @@
 package com.example.vaadindemo;
 
-import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
@@ -25,15 +23,11 @@ import javax.annotation.PostConstruct;
 public class TodoDiv extends Div {
     private VerticalLayout verticalLayout;
 
-    // todo: @Autowired cause app to crash with "java.lang.IllegalStateException: Can't move a node from one state tree to another" on reload
     @Autowired
     private TodoLayout todoLayout;
 
 
     public TodoDiv() {
-        setText("Hello world!");
-
-//        initMainComponents();
     }
 
     @PostConstruct
@@ -49,18 +43,6 @@ public class TodoDiv extends Div {
         addDeleteButton();
     }
 
-    @Override
-    protected void onAttach(final AttachEvent attachEvent) {
-//        initMainComponents();
-        System.out.println("I am in onAttach!!! 777!!!");
-    }
-    @Override
-    protected void onDetach(final DetachEvent detachEvent) {
-        System.out.println("I am in onDetach!!! 666!!!");
-    }
-
-
-
     private void setupLayout() {
         verticalLayout = new VerticalLayout();
         verticalLayout.getStyle().set("border", "1px solid #9E9E9E");
@@ -71,7 +53,7 @@ public class TodoDiv extends Div {
 
     private void addHeader() {
         final Label header = new Label("TODOs");
-//        header.addClassName(ValoTheme.LABEL_H1); // todo: ValoTheme.LABEL_H1 is not accessible in vaadin 10
+//        header.addClassName(ValoTheme.LABEL_H1); // todo: ValoTheme is not accessible in vaadin 10, style manually
 
         verticalLayout.add(header);
     }
@@ -86,7 +68,7 @@ public class TodoDiv extends Div {
 
 //        final Button addButton = new Button("Add");
         final Button addButton = new Button("");
-//        add.addClassName(ValoTheme.BUTTON_PRIMARY);
+//        add.addClassName(ValoTheme.BUTTON_PRIMARY); // todo: ValoTheme is not accessible in vaadin 10, style manually
         addButton.setIcon( new Icon(VaadinIcon.PLUS) );
 
         addButton.addClickListener(click -> {
@@ -94,8 +76,6 @@ public class TodoDiv extends Div {
            task.clear();
            task.focus();
         });
-//        ComponentUtil.addListener(addButton, KeyDownEvent.class, (t) -> addButton.click());
-
 
         formLayout.add(task, addButton);
 
@@ -103,18 +83,9 @@ public class TodoDiv extends Div {
 
 
         Shortcut.add(verticalLayout, Key.ENTER, addButton::click); // using org.vaadin.marcus.shortcut plugin
-//        Shortcut.add(verticalLayout, Key.ENTER, addButton::click, Key.SHIFT);
     }
 
     private void addTodoList() {
-
-/*
-        // todo: remove this explicit initialization and use @Autowired injection instead
-        todoLayout = new TodoLayout();
-        todoLayout.init();
-*/
-
-
         todoLayout.setWidth("80%");
 
         verticalLayout.add(todoLayout);

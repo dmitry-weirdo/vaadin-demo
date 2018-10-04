@@ -9,10 +9,11 @@ An attempt to adapt trivial Vaadin 8 webapp tutorial (https://www.youtube.com/wa
 * In `data.sql`, manual id insertion removed. Else the identity will start from 1, and insertion of new elements will fail on primary key duplication.   
   In `Todo` entity, ``@Id`` strategy changed to `GenerationType.IDENTITY` (`GenerationType.AUTO` does not use current `identity` value and fails on primary key duplication 
   and will fail on primary key duplication, if pre-inserted records exist).
-* Pressing `Ctrl + Enter` will submit an empty field, even if the value in `add` field is non-empty.
+* Pressing `Ctrl + Enter` with focus in the `add` field will submit an empty field, even if the value in `add` field is non-empty.
 * Auto-saving of changed text field is done after focusing out of this field.
   I.e. if you reload page without leaving the field, it won't be saved.
 * There is no non-empty validation on `add` field.
+* Since the scope of the shortcut is the root `VerticalLayout` now, pressing Enter on any place within it will add a record.
 * Non-empty validation seems to be working for fields withing `TodoLayout` (the empty texts are not saved and replaced back after focusing out of field)
   , but the error label is not displayed.   
   Documentation on validation is [here](https://vaadin.com/docs/v10/flow/binding-data/tutorial-flow-components-binder-validation.html).

@@ -17,3 +17,6 @@ An attempt to adapt trivial Vaadin 8 webapp tutorial (https://www.youtube.com/wa
 * Non-empty validation seems to be working for fields withing `TodoLayout` (the empty texts are not saved and replaced back after focusing out of field)
   , but the error label is not displayed.   
   Documentation on validation is [here](https://vaadin.com/docs/v10/flow/binding-data/tutorial-flow-components-binder-validation.html).
+* Added the production mode maven profile. To run Vaadin in the production mode, execute maven with `production` profile. See https://vaadin.com/docs/v10/flow/production/tutorial-production-mode-basic.html.
+  * Also see https://vaadin.com/forum/thread/17218697, which describes that `vaadin.productionMode=true` has to be put to `application.properties`.
+  * To run the project via maven, not IDEA: `mvn clean package -Pproduction -DskipTests`, then in `target` directory `java -jar vaadin-demo-0.0.1-SNAPSHOT.jar`. 

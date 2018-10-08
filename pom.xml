@@ -31,6 +31,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<vaadin.version>10.0.5</vaadin.version>
+		<tomcat.version>9.0.12</tomcat.version>
 	</properties>
 
 	<dependencies>
@@ -94,5 +95,36 @@
 		</plugins>
 	</build>
 
+
+	<profiles>
+		<profile>
+			<id>production</id>
+
+			<dependencies>
+				<dependency>
+					<groupId>com.vaadin</groupId>
+					<artifactId>flow-server-production-mode</artifactId>
+				</dependency>
+			</dependencies>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.vaadin</groupId>
+						<artifactId>vaadin-maven-plugin</artifactId>
+						<version>${vaadin.version}</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>copy-production-files</goal>
+									<goal>package-for-production</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
